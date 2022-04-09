@@ -173,16 +173,16 @@ public class Practice {
      * @return a teljes sereg száma
      */
     public static int sumArmy(int[] armyOfPlanets) {
-        int sumArmy = 0;
+        int hadsereg = 0;
 
         for (int i = 0; i < armyOfPlanets.length; i++) {
 
-            sumArmy += armyOfPlanets[i];
+            hadsereg += armyOfPlanets[i];
         }
 
 
 
-        return sumArmy;
+        return hadsereg;
     }
 
     /**
@@ -207,8 +207,6 @@ public class Practice {
                     win++;
                 }
             }
-
-
         return win;
     }
 
@@ -241,7 +239,6 @@ public class Practice {
                 break;
             }
         }
-
         return sorted;
     }
 
@@ -268,26 +265,17 @@ public class Practice {
      * @return az eredeti üzenet karakterei fordított sorrendben
      */
     public static char[] reverseMessage(char[] message) {
-        int alap = message.length;
+        char [] clone = message.clone();
+        char jelenleg = 0;
+        for (int i = 0; i < clone.length/2; i++) {
 
+            jelenleg = clone[i];
+            clone[i] = clone[clone.length-1-i];
+            clone[clone.length-1-i] = jelenleg;
 
-        if (message.length == 0) {
-            System.out.println(message);
         }
-        else {
 
-            int index = 0;
-            char first = message [0];
-            char last = message[message.length-1];
-            message [0] = last;
-            message [message.length-1] = first;
-
-            while (index < message.length) {
-                System.out.println(message[index]);
-                index++;
-            }
-        }
-        return null;
+        return clone;
     }
 
     /**
@@ -319,18 +307,22 @@ public class Practice {
      * @return a legtöbb veszteséget tartalmazó hónap index-száma
      */
     public static int getWorstMonthIndex(int[][] lossesPerMonths) {
-       int lose = 0;
+        int legrosszabbHonap = 0;
+
+        int veszteseg = 0;
+
         for (int i = 0; i < lossesPerMonths.length; i++) {
+            int sum1 = 0;
 
             for (int j = 0; j < lossesPerMonths[i].length; j++) {
-
-                lose += lossesPerMonths[i][j];
-                }
-
+                sum1 += lossesPerMonths[i][j];
             }
-
-
-        return lose;
+            if (sum1 > veszteseg) {
+                veszteseg = sum1;
+                legrosszabbHonap = i;
+            }
+        }
+        return legrosszabbHonap;
     }
 
     /**
