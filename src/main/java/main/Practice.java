@@ -17,18 +17,18 @@ public class Practice {
 
     /**
      * 1. feladat - 2p
-     *
+     * <p>
      * A különböző osztályú űrhajókat a csatákra úgy készítik fel, hogy pajzzsal látják el őket.
-     *
+     * <p>
      * Az űrhajó-osztályok és a pajzsuk ereje:
-     *      Intrepid: 100
-     *      Nova: 200
-     *      Raven: 300
-     *      Galaxy: 500
-     *      Dreadnought: 800
-     *
+     * Intrepid: 100
+     * Nova: 200
+     * Raven: 300
+     * Galaxy: 500
+     * Dreadnought: 800
+     * <p>
      * Más osztályú űrhajók nem kapnak pajzsot.
-     *
+     * <p>
      * Valósítsd meg a "getShieldPower" nevű metódust!
      * A metódus adja vissza, hogy az adott osztályú űrhajó milyen erős pajzzsal rendelkezik.
      *
@@ -36,9 +36,23 @@ public class Practice {
      * @return a pajzs ereje
      */
     public static int getShieldPower(String shipClass) {
-        return -1;
-    }
 
+    switch( shipClass) {
+
+        case "Intrepid":
+            return 100;
+        case "Nova":
+            return 200;
+        case "Raven":
+            return 300;
+        case "Galaxy":
+            return 500;
+        case "Dreadnought":
+            return 800;
+        default:
+            return 0;
+    }
+}
     /**
      * 2. feladat - 2p
      *
@@ -55,8 +69,16 @@ public class Practice {
      * @param scores az előző évi eredmények
      * @return az elvárt szint
      */
+    int[] scores = new int[]{1,1};
+
+
     public static double countRequirement(int[] scores) {
-        return 0.0;
+        int sum = scores[0] + scores[scores.length-1];
+
+        double avarage = (double) sum /2;
+
+        return avarage;
+
     }
 
     /**
@@ -77,8 +99,18 @@ public class Practice {
      * @return a hajó harcképes-e
      */
     public static boolean isShipAbleToFight(int shieldCharge, int weaponCharge) {
-        return false;
-    }
+        for (int i = 2; i <= 100; i++) {
+            double avarageCharge = ( double)(shieldCharge + weaponCharge) / 2;
+            if (shieldCharge >20 && weaponCharge >20 && avarageCharge > 50){
+                return true;
+            }
+
+            } return false;
+        }
+
+
+
+
 
     /**
      * 4. feladat - 3p
@@ -108,9 +140,22 @@ public class Practice {
      * @param requiredRabbits a megrendelt űrnyulak száma
      * @return a megrendelés teljesítéséhez szükséges napok száma
      */
+
     public static int getSpaceRabbitDays(int startRabbitValue, int requiredRabbits) {
-        return -1;
+
+    int days = 1;
+        if(startRabbitValue >= requiredRabbits){
+        return days;
+    }else{
+        while (startRabbitValue < requiredRabbits){
+            startRabbitValue *=2;
+            days++;
+        }
+        return days;
     }
+}
+
+
 
     /**
      * 5. feladat - 3p
@@ -128,7 +173,16 @@ public class Practice {
      * @return a teljes sereg száma
      */
     public static int sumArmy(int[] armyOfPlanets) {
-        return -1;
+        int sumArmy = 0;
+
+        for (int i = 0; i < armyOfPlanets.length; i++) {
+
+            sumArmy += armyOfPlanets[i];
+        }
+
+
+
+        return sumArmy;
     }
 
     /**
@@ -147,7 +201,15 @@ public class Practice {
      * @return a megnyert csaták darabszáma
      */
     public static int countVictories(int[] battles) {
-        return -1;
+        int win = 0;
+        for (int i = 0; i < battles.length; i++) {
+                if (battles[i] > 0){
+                    win++;
+                }
+            }
+
+
+        return win;
     }
 
     /**
@@ -164,8 +226,25 @@ public class Practice {
      * @param heights a kadétok magassága
      */
     public static boolean isInAscendingOrder(int[] heights) {
-        return false;
+        int[] clone = heights.clone();
+        boolean sorted = true;
+        for (int i = 0; i < clone.length - 1; i++) {
+            for (int j = 0; j < clone.length - i - 1; j++) {
+                if (clone[j] > clone[j + 1]) {
+                    int swap = clone[j];
+                    clone[j] = clone[j + 1];
+                    clone[j + 1] = swap;
+                    sorted = false;
+                }
+            }
+            if (sorted) {
+                break;
+            }
+        }
+
+        return sorted;
     }
+
 
     /**
      * 8. feladat - 4p
@@ -189,6 +268,25 @@ public class Practice {
      * @return az eredeti üzenet karakterei fordított sorrendben
      */
     public static char[] reverseMessage(char[] message) {
+        int alap = message.length;
+
+
+        if (message.length == 0) {
+            System.out.println(message);
+        }
+        else {
+
+            int index = 0;
+            char first = message [0];
+            char last = message[message.length-1];
+            message [0] = last;
+            message [message.length-1] = first;
+
+            while (index < message.length) {
+                System.out.println(message[index]);
+                index++;
+            }
+        }
         return null;
     }
 
@@ -221,7 +319,18 @@ public class Practice {
      * @return a legtöbb veszteséget tartalmazó hónap index-száma
      */
     public static int getWorstMonthIndex(int[][] lossesPerMonths) {
-        return -1;
+       int lose = 0;
+        for (int i = 0; i < lossesPerMonths.length; i++) {
+
+            for (int j = 0; j < lossesPerMonths[i].length; j++) {
+
+                lose += lossesPerMonths[i][j];
+                }
+
+            }
+
+
+        return lose;
     }
 
     /**
@@ -248,6 +357,9 @@ public class Practice {
      * @param shipPowers az űrhajók ereje
      */
     public static void sortShipsByPower(String[] shipNames, int[] shipPowers) {
+
+
+
 
     }
 
